@@ -18,11 +18,11 @@ const booksError = (error) => {
   }
 };
 
-const fetchBooks = (bookstoreService, dispath) => () => {
-  dispath(booksRequested());
+const fetchBooks = (bookstoreService, dispatch) => () => {
+  dispatch(booksRequested());
   bookstoreService.getBooks()
-    .then((data) => dispath(booksLoaded(data)))
-    .catch((err) => dispath(booksError(err)));
+    .then((data) => dispatch(booksLoaded(data)))
+    .catch((err) => dispatch(booksError(err)));
 };
 
 export {
