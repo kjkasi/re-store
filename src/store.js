@@ -25,6 +25,9 @@ const logEnhancer = (createStore) => (...args) => {
   const originalDispatch = store.dispatch;
 
   store.dispatch = (action) => {
+    if (!action || typeof action.type !== "string") {
+      return originalDispatch(action);
+    }
     console.log(action.type);
     return originalDispatch(action);
   };
@@ -33,7 +36,5 @@ const logEnhancer = (createStore) => (...args) => {
 };
 
 const store = createStore(reducer, compose(stringEnhancer, logEnhancer));
-
-store.dispatch('HELLOW_WORLD');
 
 export default store;
